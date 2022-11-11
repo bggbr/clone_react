@@ -1,17 +1,12 @@
 import React from 'react';
 import Navbar from './components/common/Navbar';
+import Banner from './components/Banner';
 
 function App() {
 	return (
-		<div className=''>
+		<div className='relative'>
 			<Navbar />
-			<img src='/logo512.png' alt='' />
-			<img src='/logo512.png' alt='' />
-			<img src='/logo512.png' alt='' />
-			<img src='/logo512.png' alt='' />
-			<img src='/logo512.png' alt='' />
-			<img src='/logo512.png' alt='' />
-			<img src='/logo512.png' alt='' />
+			<Banner />
 		</div>
 	);
 }
