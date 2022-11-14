@@ -43,11 +43,21 @@ const Banner = () => {
 			>
 				{/* <h1 className='absolute top-10 left-10 w-10 h-10 text-white-100'>{movie.name}</h1> */}
 			</div>
-			<h1 className='absolute bottom-[400px] left-10 w-100 h-100 text-white text-5xl font-bold'>{title}</h1>
-			<div className='absolute bottom-[350px] left-10 text-white '>
-				<button>Play</button>
-				<button>More Information</button>
-			</div>
+			<h1 className="absolute bottom-[400px] left-10 w-100 h-100 text-white text-5xl font-bold">{title}</h1>
+            <div className="absolute bottom-[335px] left-10 text-white flex">
+                <div className="w-20 flex justify-center bg-white px-1 py-2 text-black rounded-md mr-5">
+                    <div className="flex justify-center items-center mr-1">
+                        <img className="w-4 h-4 " src="/assets/icon/play-arrow.png" alt="play" />
+                    </div>
+                    <span className="flex items-center font-bold">Play</span>
+                </div>
+                <div className="w-30 flex justify-center bg-gray-500 px-5 py-2 text-white rounded-md">
+                    <div className="flex justify-center items-center mr-2">
+                        <svg className="w-4 h-4  fill-white " src="/assets/icon/info.svg"></svg>
+                    </div>
+                    <span className="flex-col justify-center font-bold">More Information</span>
+                </div>
+            </div>
 			<span className='absolute bottom-[150px] left-10 w-[500px] h-100 text-white text-xl font-bold text-ellipsis'>{overview}</span>
 		</div>
 	);
