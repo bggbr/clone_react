@@ -9,6 +9,9 @@ module.exports = {
 			height: {
 				192: '48rem',
 			},
+			flex: {
+				1: '1 0 25%',
+			},
 		},
 	},
 	plugins: [],
