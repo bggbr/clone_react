@@ -54,29 +54,29 @@ export default function Row() {
 	fetchMovieGenre();
 	return (
 		<>
-			{test.map((v, i) => (
-				<div>
-					<img
-						className='w-10 h-10'
-						src={v}
-						alt='img'
-						ref={(el) => {
-							ttt.current[i] = el;
-						}}
-					/>
-				</div>
-			))}
 			<div className='relative w-full h-[12rem] flex overflow-hidden' onMouseOver={createArrow} onMouseLeave={removeArrow}>
-				<img
+				{test.map((v, i) => (
+					<div className='inline-block flex-1 w-50 h-full m-1'>
+						<img
+							className='w-10 h-10'
+							src={v}
+							alt='img'
+							ref={(el) => {
+								ttt.current[i] = el;
+							}}
+						/>
+					</div>
+				))}
+				{/* <img
 					className={'w-10 h-10 absolute top-20 cursor-pointer ' + (arrow ? ' ' : ' hidden')}
 					src='/assets/icon/left-arrow.png'
 					alt='left'
-				/>
+				/> */}
 				{/* <div className='inline-block flex-1 w-50 h-full m-1 bg-green-500'></div>
 			<div className='inline-block flex-1 w-50 h-full m-1 bg-red-500'></div>
 			<div className='inline-block flex-1 w-50 h-full m-1 bg-blue-500'></div>
 			<div className='inline-block flex-1 w-50 h-full m-1 bg-yellow-500'></div> */}
-				<div className='inline-block flex-1 w-50 h-full m-1'>
+				{/* <div className='inline-block flex-1 w-50 h-full m-1'>
 					<img className='block h-full hover:h-60' ref={image} src={bannerUrl} alt='test' />
 				</div>
 				<div className='inline-block flex-1 w-50 h-full m-1'>
@@ -96,7 +96,7 @@ export default function Row() {
 					src='/assets/icon/right-arrow.png'
 					alt='right'
 					onClick={slideRight}
-				/>
+				/> */}
 			</div>
 			{/* <div className='flex flex-nowrap overflow-hidden '>
 				// <div className='w-[500px] h-full bg-green-500 m-10'>test</div>
