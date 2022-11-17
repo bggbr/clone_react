@@ -1,21 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import MovieModal from './common/MovieModal';
 import axios from '../api/axios';
-import requests from '../api/requests';
 
 export default function Row({ isLargeRow, title, id, fetchUrl }) {
 	const [movies, setMovies] = useState([]);
 	const [arrow, setArrow] = useState(false);
+	const [ModalOpen, setModalOpen] = useState(false);
+	const [movieSelected, setMovieSelected] = useState({});
 
 	async function fetchMovieData() {
 		const request = await axios.get(fetchUrl);
 		setMovies(request.data.results);
 	}
 
-	const rowImages = useRef([]);
+	const handleClick = (movie) => {
+		console.log(movie);
+
+		setModalOpen(true);
+		setMovieSelected(movie);
+	};
 
 	useEffect(() => {
 		fetchMovieData();
-		console.log(movies);
 	}, []);
 
 	return (
@@ -35,7 +41,12 @@ export default function Row({ isLargeRow, title, id, fetchUrl }) {
 			>
 				{movies.map((movie, index) => (
 					<div className='flex-1 mr-8 transition duration-500 hover:scale-105' key={movie.id}>
-						<img className='h-full ' src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt='img' />
+						<img
+							className='h-full cursor-pointer'
+							src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+							alt='img'
+							onClick={() => handleClick(movie)}
+						/>
 					</div>
 				))}
 			</div>
@@ -45,6 +56,12 @@ export default function Row({ isLargeRow, title, id, fetchUrl }) {
 			>
 				{'>'}
 			</span>
+			{ModalOpen && (
+				<MovieModal
+					movie={{ ...movieSelected }} //
+					setModalOpen
+				/>
+			)}
 		</div>
 	);
 }
