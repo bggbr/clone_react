@@ -18,7 +18,7 @@ function Navbar() {
 	}, []);
 
 	return (
-		<nav className={'fixed top-0 w-full h-20 ' + (show ? 'bg-black' : 'bg-transparent')}>
+		<nav className={'z-50 fixed top-0 w-full h-20 ' + (show ? 'bg-black' : 'bg-transparent')}>
 			<div className='flex h-full justify-between'>
 				<div className='flex justify-center items-center ml-12'>
 					<img

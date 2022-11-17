@@ -2,81 +2,49 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from '../api/axios';
 import requests from '../api/requests';
 
-export default function Row() {
-    // const [movie, setMovie] = useState([]);
-    const [bannerUrl, setBannerUrl] = useState('');
-    const [arrow, setArrow] = useState(false);
-    const [test, setTest] = useState([]);
+export default function Row({ isLargeRow, title, id, fetchUrl }) {
+	const [movies, setMovies] = useState([]);
+	const [arrow, setArrow] = useState(false);
 
-    async function fetchMovieGenre() {
-        const test = await axios.get(requests.fetchTrending);
-        // console.log(test.data);
-        // setMovie(test.data.results);
-        // setTest(`https://image.tmdb.org/t/p/original/${test.data.results[5].backdrop_path}`);
-        setBannerUrl(`https://image.tmdb.org/t/p/original/${test.data.results[5].backdrop_path}`);
-    }
+	async function fetchMovieData() {
+		const request = await axios.get(fetchUrl);
+		setMovies(request.data.results);
+	}
 
-    async function fetchTest() {
-        const test = await axios.get(requests.fetchTrending);
-        const array = [];
-        for (let url of test.data.results) {
-            // console.log(url.backdrop_path);
-            array.push(`https://image.tmdb.org/t/p/original/${url.backdrop_path}`);
-        }
-        setTest([...array]);
-    }
+	const rowImages = useRef([]);
 
-    const index = useRef(0);
-    const rowImages = useRef([]);
-    const show = 'flex-1 mr-8 transition duration-500 hover:scale-105';
-    const hide = 'hidden flex-0 mr-8 transition duration-500 hover:scale-105';
+	useEffect(() => {
+		fetchMovieData();
+		console.log(movies);
+	}, []);
 
-    const createArrow = () => {
-        setArrow(true);
-    };
-
-    const removeArrow = () => {
-        setArrow(false);
-    };
-
-    const slideRight = () => {
-        if (index.current > 18) return;
-        rowImages.current[index.current].className = hide;
-        index.current++;
-        console.log(index.current);
-    };
-
-    const slideLeft = () => {
-        if (index.current < 1) return;
-        rowImages.current[index.current].className = show;
-        index.current--;
-        console.log(index.current);
-    };
-
-    useEffect(() => {
-        fetchMovieGenre();
-        fetchTest();
-    }, []);
-
-    fetchMovieGenre();
-
-    return (
-        <div className="relative w-full h-[20rem] flex overflow-hidden p-10 bg-black" onMouseOver={createArrow} onMouseLeave={removeArrow}>
-            <img className={'w-8 h-12 z-50 rotate-180 absolute top-36 cursor-pointer ' + (arrow ? '' : 'hidden')} src="/assets/icon/right-arrow.png" alt="left" onClick={slideLeft} />
-
-            {test.map((v, i) => (
-                <div
-                    className="flex-1 mr-8 transition duration-500 hover:scale-105"
-                    key={i}
-                    ref={(el) => {
-                        rowImages.current[i] = el;
-                    }}
-                >
-                    <img className="h-full " src={v} alt="img" />
-                </div>
-            ))}
-
-            <img className={'w-8 h-12 z-50  absolute top-36 right-12 cursor-pointer ' + (arrow ? '' : 'hidden')} src="/assets/icon/right-arrow.png" alt="right" onClick={slideRight} />
-        </div>
-    );
+	return (
+		<div className='bg-black relative'>
+			<h1 className='text-white text-2xl font-bold ml-10 pt-4'>{title}</h1>
+			<span
+				className={'flex text-[25px] z-50 absolute top-44 left-4 cursor-pointer text-white '}
+				onClick={() => (document.getElementById(id).scrollLeft -= window.innerWidth - 80)}
+			>
+				{'<'}
+			</span>
+			<div
+				id={id}
+				className='relative w-full h-[20rem] flex overflow-hidden px-10 py-4 bg-black'
+				onMouseOver={() => setArrow(true)}
+				onMouseLeave={() => setArrow(false)}
+			>
+				{movies.map((movie, index) => (
+					<div className='flex-1 mr-8 transition duration-500 hover:scale-105' key={movie.id}>
+						<img className='h-full ' src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt='img' />
+					</div>
+				))}
+			</div>
+			<span
+				className={'flex text-[25px] z-50 absolute top-44 right-4 cursor-pointer text-white '}
+				onClick={() => (document.getElementById(id).scrollLeft += window.innerWidth - 80)}
+			>
+				{'>'}
+			</span>
+		</div>
+	);
 }
