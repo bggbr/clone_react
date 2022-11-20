@@ -4,8 +4,8 @@ const MovieModal = ({ movie, setModalOpen }) => {
 	const isModal = useRef();
 
 	const test = (e) => {
-		console.log(e.currentTarget);
-		console.log('test');
+		// console.log(e.currentTarget);
+		// console.log('test');
 	};
 
 	const closeModal = () => {
@@ -13,10 +13,10 @@ const MovieModal = ({ movie, setModalOpen }) => {
 	};
 
 	useEffect(() => {
-		window.addEventListener('click', () => {
-			console.log('except');
-			if (isModal.current) closeModal();
-		});
+		// window.addEventListener('click', () => {
+		// 	console.log('except');
+		// 	if (isModal.current) closeModal();
+		// });
 		return () => {
 			// window.removeEventListener('click', closeModal);
 		};

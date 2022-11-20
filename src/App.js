@@ -1,44 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Outlet, Routes, Route } from 'react-router-dom';
 import Navbar from './components/common/Navbar';
-import Banner from './components/Banner';
-import Row from './components/Row';
-import requests from './api/requests';
+import DetailPage from './pages/DetailPage';
+import MainPage from './pages/MainPage';
+import SearchPage from './pages/SearchPage';
+
+const Layout = () => {
+	return (
+		<div>
+			<Navbar />
+			<Outlet />
+		</div>
+	);
+};
 
 function App() {
 	return (
-		<div className='w-screen h-full relative'>
-			<Navbar />
-			<Banner />
-			<Row
-				title='NETFLIX ORIGINALS' //
-				id='NO'
-				fetchUrl={requests.fetchNetflixOriginals}
-				isLargeRow
-			/>
-			<Row
-				title='Trending Now' //
-				id='TN'
-				fetchUrl={requests.fetchTrending}
-				isLargeRow
-			/>
-			<Row
-				title='Top Rated' //
-				id='TR'
-				fetchUrl={requests.fetchTopRated}
-				isLargeRow
-			/>
-			<Row
-				title='Action Movies' //
-				id='AM'
-				fetchUrl={requests.fetchActionMovies}
-				isLargeRow
-			/>
-			<Row
-				title='Comedy Movies' //
-				id='CM'
-				fetchUrl={requests.fetchComedyMovies}
-				isLargeRow
-			/>
+		<div className='app'>
+			<Routes>
+				<Route path='/' element={<Layout />}>
+					<Route index element={<MainPage />}></Route>
+					<Route path='/:movieId' element={<DetailPage />}></Route>
+					<Route path='/search' element={<SearchPage />}></Route>
+				</Route>
+			</Routes>
 		</div>
 	);
 }
