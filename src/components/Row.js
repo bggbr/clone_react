@@ -14,8 +14,6 @@ export default function Row({ isLargeRow, title, id, fetchUrl }) {
 	}
 
 	const handleClick = (movie) => {
-		console.log(movie);
-
 		setModalOpen(true);
 		setMovieSelected(movie);
 	};
@@ -59,7 +57,7 @@ export default function Row({ isLargeRow, title, id, fetchUrl }) {
 			{ModalOpen && (
 				<MovieModal
 					movie={{ ...movieSelected }} //
-					setModalOpen
+					setModalOpen={setModalOpen}
 				/>
 			)}
 		</div>
