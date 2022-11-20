@@ -16,7 +16,7 @@ const Layout = () => {
 
 function App() {
 	return (
-		<div className='app'>
+		<div className='app bg-black'>
 			<Routes>
 				<Route path='/' element={<Layout />}>
 					<Route index element={<MainPage />}></Route>
