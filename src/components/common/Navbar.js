@@ -28,6 +28,13 @@ function Navbar() {
 						onClick={() => window.location.reload()}
 					/>
 				</div>
+				<div className='flex justify-center items-center'>
+					<input
+						type='text'
+						placeholder='search movie'
+						className='bg-black p-1 rounded-l focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500'
+					/>
+				</div>
 				<div className='flex justify-center items-center mr-12'>
 					<img
 						className='block h-12 cursor-pointer'
