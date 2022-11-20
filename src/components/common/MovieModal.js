@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const MovieModal = ({ movie, setModalOpen }) => {
+	const isModal = useRef();
+
+	const test = (e) => {
+		console.log(e.currentTarget);
+		console.log('test');
+	};
+
+	const closeModal = () => {
+		setModalOpen(false);
+	};
+
+	useEffect(() => {
+		window.addEventListener('click', () => {
+			console.log('except');
+			if (isModal.current) closeModal();
+		});
+		return () => {
+			// window.removeEventListener('click', closeModal);
+		};
+	}, []);
 	return (
 		// <div className='w-screen h-screen'>
 		// <div className='fixed top-1/8 left-20 bg-yellow-500 m-20 w-3/4 h-[1000px] z-40'>1234</div>
 		// </div>
-		<div className='z-50 fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'>
+		<div className='z-50 fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2' ref={isModal} onClick={test}>
 			<div className='wrapper-modal pt-2 flex justify-center'>
 				<div className='modal relative max-w-[800px] bg-black rounded-lg'>
-					<span
-						className='modal-close text-white absolute top-1 right-4 text-2xl cursor-pointer'
-						onClick={() => setModalOpen(false)}
-					>
+					<span className='modal-close text-white absolute top-1 right-4 text-2xl cursor-pointer' onClick={closeModal}>
 						{'x'}
 					</span>
 					<img
