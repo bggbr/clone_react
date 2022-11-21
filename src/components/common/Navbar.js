@@ -12,18 +12,21 @@ function Navbar() {
 	};
 
 	useEffect(() => {
-		window.addEventListener('scroll', () => {
-			if (window.scrollY > 160) {
-				setShow(true);
-			} else {
-				setShow(false);
-			}
-		});
-
+		if (window.location.pathname === '/') {
+			window.addEventListener('scroll', () => {
+				if (window.scrollY > 50) {
+					setShow(true);
+				} else {
+					setShow(false);
+				}
+			});
+		} else {
+			setShow(true);
+		}
 		return () => {
 			window.removeEventListener('scroll', () => {});
 		};
-	}, []);
+	}, [window.location.pathname]);
 
 	return (
 		<nav className={'z-50 fixed top-0 w-full h-20 ' + (show ? 'bg-black' : 'bg-transparent')}>
