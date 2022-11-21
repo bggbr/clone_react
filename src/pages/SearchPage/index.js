@@ -27,12 +27,12 @@ const SearchPage = () => {
 
 	const renderSearchResults = () => {
 		return searchResult.length > 0 ? (
-			<section className='search-container h-full bg-black flex flex-wrap justify-center mt-20'>
+			<section className='search-container h-full bg-black flex flex-wrap justify-center pt-20'>
 				{searchResult.map((movie) => {
 					if (movie.backdrop_path !== null && movie.media_type !== 'person') {
 						const movieImageUrl = 'https://image.tmdb.org/t/p/w500' + movie.backdrop_path;
 						return (
-							<div className='movie p-4' key={movie.id}>
+							<div className='movie m-4 cursor-pointer' key={movie.id}>
 								<div className='movie__column-poster'>
 									<img src={movieImageUrl} alt='movieImage' className='movie__poster' />
 								</div>

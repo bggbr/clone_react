@@ -10,26 +10,23 @@ function Navbar() {
 		setSearchValue(e.target.value);
 		navigate(`/search?q=${e.target.value}`);
 	};
+	console.log(window.location.pathname);
 
 	useEffect(() => {
-		if (window.location.pathname === '/') {
-			window.addEventListener('scroll', () => {
-				if (window.scrollY > 50) {
-					setShow(true);
-				} else {
-					setShow(false);
-				}
-			});
-		} else {
-			setShow(true);
-		}
+		window.addEventListener('scroll', () => {
+			if (window.scrollY > 50) {
+				setShow(true);
+			} else {
+				setShow(false);
+			}
+		});
 		return () => {
 			window.removeEventListener('scroll', () => {});
 		};
 	}, [window.location.pathname]);
 
 	return (
-		<nav className={'z-50 fixed top-0 w-full h-20 ' + (show ? 'bg-black' : 'bg-transparent')}>
+		<nav className={'z-20 fixed top-0 w-full h-20 ' + (show ? 'bg-black' : '')}>
 			<div className='flex h-full justify-between'>
 				<div className='flex justify-center items-center ml-12'>
 					<img
