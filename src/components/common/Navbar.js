@@ -10,7 +10,7 @@ function Navbar() {
 		setSearchValue(e.target.value);
 		navigate(`/search?q=${e.target.value}`);
 	};
-	console.log(window.location.pathname);
+	// console.log(window.location.pathname);
 
 	useEffect(() => {
 		window.addEventListener('scroll', () => {
